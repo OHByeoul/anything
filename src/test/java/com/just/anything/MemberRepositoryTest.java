@@ -1,6 +1,7 @@
 package com.just.anything;
 
 
+import com.just.anything.domain.Member;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ class MemberRepositoryTest {
     @Transactional
     public void testMember() throws Exception {
         Member member = new Member();
-        member.setUsername("mem1");
+        member.setName("mem1");
         Long save = memberRepository.save(member);
         Member member1 = memberRepository.find(save);
 

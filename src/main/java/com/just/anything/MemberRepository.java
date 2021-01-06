@@ -1,5 +1,6 @@
 package com.just.anything;
 
+import com.just.anything.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
