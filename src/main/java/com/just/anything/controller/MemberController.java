@@ -7,8 +7,11 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +25,10 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String create(MemberForm form){
+    public String create(@Valid MemberForm form, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "members/createMemberForm";
+        }
         Address address = new Address(form.getCity(),form.getStreet(), form.getZipcode());
         Member member = new Member();
         member.setName(form.getName());
