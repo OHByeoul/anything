@@ -3,13 +3,10 @@ package com.just.anything.item;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
-@DiscriminatorColumn(name="A")
+@DiscriminatorValue("A")
 @Getter
 @Setter
 public class Album extends Item {
