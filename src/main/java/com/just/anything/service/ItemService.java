@@ -1,5 +1,6 @@
 package com.just.anything.service;
 
+import com.just.anything.item.Book;
 import com.just.anything.item.Item;
 import com.just.anything.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,14 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item){
         itemRepository.save(item);
+    }
+
+    @Transactional
+    public void updateItem(Long itemId, Book param){
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setPrice(param.getPrice());
+        findItem.setName(param.getName());
+        findItem.setStockQuantity(param.getStockQuantity());
     }
 
     public List<Item> findItems(){
