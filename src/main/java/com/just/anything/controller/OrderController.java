@@ -1,7 +1,9 @@
 package com.just.anything.controller;
 
 import com.just.anything.domain.Member;
+import com.just.anything.domain.Order;
 import com.just.anything.item.Item;
+import com.just.anything.repository.OrderSearch;
 import com.just.anything.service.ItemService;
 import com.just.anything.service.MemberService;
 import com.just.anything.service.OrderService;
@@ -9,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,5 +39,12 @@ public class OrderController {
     public String order(@RequestParam("memberId") Long memberId, @RequestParam("itemId") Long itemId, @RequestParam("count") int count){
         orderService.order(memberId,itemId,count);
         return "redirect:/orders";
+    }
+
+    @GetMapping("/orders")
+    public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
+        List<Order> orders = orderService.findOrders(orderSearch);
+        model.addAttribute("orders",orders);
+        return "order/orderList";
     }
 }
