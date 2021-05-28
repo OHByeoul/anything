@@ -4,6 +4,7 @@ import com.just.anything.domain.Member;
 import com.just.anything.dto.*;
 import com.just.anything.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,16 +25,17 @@ public class MemberApiController {
     }
 
     @PutMapping("/api/v1/members/{id}")
-    public UpdateMemberResponse updateMember(@PathVariable("id") Long id, @RequestBody @Valid UpdateMemberRequest request){
+    public ResponseEntity<CommonResponse> updateMember(@PathVariable("id") Long id, @RequestBody @Valid UpdateMemberRequest request){
         memberService.update(id, request.getName());
         Member findMember = memberService.findOne(id);
-        return new UpdateMemberResponse(findMember.getId(),findMember.getName());
+        return ResponseEntity.ok().body(new CommonResponse(request.getName()));
     }
 
 
     @GetMapping("/api/v1/members")
     public DataResult findMembers(){
         List<Member> members = memberService.findMembers();
+
         List<MemberDto> collect = members.stream().map(m -> new MemberDto(m.getName()))
                 .collect(Collectors.toList());
 
