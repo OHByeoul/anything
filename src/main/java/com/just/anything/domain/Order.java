@@ -48,6 +48,7 @@ public class Order {
     public void setDelivery(Delivery delivery){
         this.delivery = delivery;
         delivery.setOrder(this);
+        delivery.setAddress(delivery.getAddress());
     }
 
     /**
