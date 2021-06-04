@@ -32,4 +32,12 @@ public class SimpleOrderApiController {
 
     }
 
+    @GetMapping("/api/v3/simple-orders")
+    public List<SimpleOrderDto> orders3() {
+        return orderRepository.findAllWithMemberAndDelivery()
+                .stream().map(o->new SimpleOrderDto(o))
+                .collect(Collectors.toList());
+
+    }
+
 }
