@@ -12,8 +12,8 @@ public class AnythingApplication {
 		SpringApplication.run(AnythingApplication.class, args);
 	}
 
-//	@Bean
-//	Hibernate5Module hibernate5Module(){ //
-//		return new Hibernate5Module();
-//	}
+	@Bean
+	Hibernate5Module hibernate5Module(){ //
+		return new Hibernate5Module();
+	}
 }
