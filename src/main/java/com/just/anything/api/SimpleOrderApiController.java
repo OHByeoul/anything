@@ -1,10 +1,11 @@
 package com.just.anything.api;
 
 import com.just.anything.domain.Order;
-import com.just.anything.dto.OrderQueryDto;
+import com.just.anything.repository.orderdtoquery.OrderQueryDto;
 import com.just.anything.dto.SimpleOrderDto;
 import com.just.anything.repository.OrderRepository;
 import com.just.anything.repository.OrderSearch;
+import com.just.anything.repository.orderdtoquery.OrderQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SimpleOrderApiController {
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     @GetMapping("/api/v1/simple-orders")
     public List<Order> orders(){
@@ -42,7 +44,7 @@ public class SimpleOrderApiController {
 
     @GetMapping("/api/v4/simple-orders")
     public List<OrderQueryDto> orders4() {
-        return orderRepository.findAllQueryDto();
+        return orderQueryRepository.findAllQueryDto();
     }
 
 }

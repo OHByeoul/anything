@@ -2,8 +2,6 @@ package com.just.anything.repository;
 
 
 import com.just.anything.domain.Order;
-import com.just.anything.dto.OrderQueryDto;
-import com.just.anything.dto.SimpleOrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -79,10 +77,5 @@ public class OrderRepository {
                 .getResultList();
     }
 
-    public List<OrderQueryDto> findAllQueryDto() {
-        return em.createQuery("select new com.just.anything.dto.OrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address) " +
-                " from Order o"+
-                " join o.member m" +
-                " join o.delivery d", OrderQueryDto.class).getResultList();
-    }
+
 }

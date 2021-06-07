@@ -1,4 +1,4 @@
-package com.just.anything.dto;
+package com.just.anything.repository.orderdtoquery;
 
 import com.just.anything.domain.Address;
 import com.just.anything.domain.Order;
