@@ -30,8 +30,15 @@ public class OrderApiController {
     }
 
     @GetMapping("/api/v2/orders")
-    public List<OrderDto> orders2(){
+    public List<OrderDto> orders2(){ // dto로 반환
         List<Order> orders = orderRepository.findAllByString(new OrderSearch());
+        return orders.stream()
+                .map(o->new OrderDto(o)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> orders3(){ // dto로 반환
+        List<Order> orders = orderRepository.findAllWithItem();
         return orders.stream()
                 .map(o->new OrderDto(o)).collect(Collectors.toList());
     }
