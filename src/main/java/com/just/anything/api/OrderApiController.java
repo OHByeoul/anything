@@ -7,6 +7,7 @@ import com.just.anything.repository.OrderRepository;
 import com.just.anything.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -39,6 +40,16 @@ public class OrderApiController {
     @GetMapping("/api/v3/orders")
     public List<OrderDto> orders3(){ // dto로 반환
         List<Order> orders = orderRepository.findAllWithItem();
+        return orders.stream()
+                .map(o->new OrderDto(o)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v3.1/orders")
+    public List<OrderDto> orders3_1(
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
+            @RequestParam(value = "limit", defaultValue = "100") int limit
+    ){ // dto로 반환
+        List<Order> orders = orderRepository.findAllWithMemberDelivery(offset, limit);
         return orders.stream()
                 .map(o->new OrderDto(o)).collect(Collectors.toList());
     }

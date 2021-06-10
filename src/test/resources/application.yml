@@ -12,6 +12,7 @@ spring:
       hibernate:
 #        show_sql: true 로그를 sysout으로 찍는거
         format_sql: true
+        default_batch_fetch_size: 100
 
 logging:
   level:
