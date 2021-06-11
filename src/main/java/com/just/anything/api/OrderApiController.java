@@ -5,6 +5,8 @@ import com.just.anything.domain.OrderItem;
 import com.just.anything.dto.OrderDto;
 import com.just.anything.repository.OrderRepository;
 import com.just.anything.repository.OrderSearch;
+import com.just.anything.repository.order.query.OrderQueryRepository2;
+import com.just.anything.repository.orderdtoquery.OrderQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderApiController {
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository2 orderQueryRepository2;
 
     @GetMapping("/api/v1/orders") //엔티티 노출하는 방법
     public List<Order> orders1(){
@@ -52,5 +55,10 @@ public class OrderApiController {
         List<Order> orders = orderRepository.findAllWithMemberDelivery(offset, limit);
         return orders.stream()
                 .map(o->new OrderDto(o)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> orders4(){
+        return orderQueryRepository2.findOrderQueryDtos();
     }
 }

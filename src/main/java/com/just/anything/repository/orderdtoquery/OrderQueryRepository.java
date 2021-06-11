@@ -17,4 +17,6 @@ public class OrderQueryRepository {
                 " join o.member m" +
                 " join o.delivery d", OrderQueryDto.class).getResultList();
     }
+
+
 }
