@@ -23,7 +23,7 @@ public class OrderQueryRepository2 {
     }
 
     private List<OrderItemQueryDto> findOrderItems(Long orderId) {
-        return em.createQuery("select new com.just.anything.order.query.OrderItemQueryDto(oi.order.id,i.name,oi.orderPrice,oi.count)" +
+        return em.createQuery("select new com.just.anything.repository.order.query.OrderItemQueryDto(oi.order.id,i.name,oi.orderPrice,oi.count)" +
                 " from OrderItem oi" +
                 " join oi.item i" +
                 " where oi.order.id = :orderId",OrderItemQueryDto.class)
@@ -31,9 +31,9 @@ public class OrderQueryRepository2 {
     }
 
     private List<OrderQueryDto2> findOrders(){
-        return em.createQuery("select new com.just.anything.order.query.OrderQueryDto2(o.id,m.name,o.orderDate,o.status,d.address) from Order o"+
+        return em.createQuery("select new com.just.anything.repository.order.query.OrderQueryDto2(o.id,m.name,o.orderDate,o.status,d.address) from Order o"+
                 " join o.member m" +
-                "join o.delivery d",OrderQueryDto2.class)
+                " join o.delivery d",OrderQueryDto2.class)
                 .getResultList();
     }
 }

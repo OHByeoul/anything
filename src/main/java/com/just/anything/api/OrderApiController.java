@@ -5,6 +5,7 @@ import com.just.anything.domain.OrderItem;
 import com.just.anything.dto.OrderDto;
 import com.just.anything.repository.OrderRepository;
 import com.just.anything.repository.OrderSearch;
+import com.just.anything.repository.order.query.OrderQueryDto2;
 import com.just.anything.repository.order.query.OrderQueryRepository2;
 import com.just.anything.repository.orderdtoquery.OrderQueryDto;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +59,7 @@ public class OrderApiController {
     }
 
     @GetMapping("/api/v4/orders")
-    public List<OrderQueryDto> orders4(){
+    public List<OrderQueryDto2> orders4(){
         return orderQueryRepository2.findOrderQueryDtos();
     }
 }

@@ -15,4 +15,16 @@ public class OrderQueryDto2 {
     private OrderStatus orderStatus;
     private Address address;
     private List<OrderItemQueryDto> orderItems;
+
+    public OrderQueryDto2(Long orderId,
+                         String name,
+                         LocalDateTime orderDate,
+                         OrderStatus orderStatus,
+                         Address address) {
+        this.orderId = orderId;
+        this.name = name;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.address = address;
+    }
 }
