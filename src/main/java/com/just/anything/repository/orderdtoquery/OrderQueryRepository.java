@@ -1,5 +1,6 @@
 package com.just.anything.repository.orderdtoquery;
 
+import com.just.anything.dto.OrderFlatDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +19,14 @@ public class OrderQueryRepository {
                 " join o.delivery d", OrderQueryDto.class).getResultList();
     }
 
-
+    public List<OrderFlatDto> findAllByDto_flat(){
+        return em.createQuery("select new " +
+                " com.just.anything.dto.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                " from Order o" +
+                " join o.member m" +
+                " join o.delivery d" +
+                " join o.orderItems oi" +
+                " join oi.item i", OrderFlatDto.class)
+                .getResultList();
+    }
 }
